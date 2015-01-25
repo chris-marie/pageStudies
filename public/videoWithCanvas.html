@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        #hiddenCanvas {
+            display: none;
+        }
+        #displayCanvas{
+            background-image: url(../../examples/photo.jpg);
+            background-repeat: no-repeat;
+            background-position: left -20px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="row">
+    <div class="span5">
+        <video id="sourceVideo" controls="true">
+            <source src="videos/DJI001.MP4" />
+            <!--<source src="mdy.webm" /> -->
+        </video>
+        <canvas id="hiddenCanvas" width="320" height="192"></canvas>
+    </div>
+    <div class="span5">
+        <canvas id="displayCanvas" width="320" height="192"></canvas>
+    </div>
+</div>
+
+<script>
+    // tutorial using: http://tech.pro/tutorial/1281/chroma-key-video-effects-using-javascript-and-the-html5-canvas-element
+    var myCanvas = document.getElementById('displayCanvas');
+    var myContext = myCanvas.getContext('2d');
+
+    var sourceVideo = document.getElementById("sourceVideo");
+    var hiddenCanvas = document.getElementById("hiddenCanvas");
+    var displayCanvas = document.getElementById("displayCanvas");
+    var hiddenContext = hiddenCanvas.getContext ("2d");
+    var displayContext = displayCanvas.getContext ("2d");
+
+    sourceVideo.addEventListener(‘play’, function (){runAnalysis()});
+
+    // recursive function to check status of video
+    runAnalysis: function() {
+        if (sourceVideo.paused || sourceVideo.ended) {
+            return;
+        }
+        frameConversion();
+
+        // to poll resources and fire at the smallest possible interval
+        if(requestAnimationFrame) {
+            requestAnimationFrame(runAnalysis);
+        } else {
+                setTimeout(runAnalysis, 0);
+        }
+    };
+
+
+    // pull video data, run analysis, replace pixels
+    var frameConversion = function(){
+
+
+        // use drawImage method to pull video frame
+        hiddenContext.drawImage(sourceVideo,0,0,sourceVideo.videoWidth, sourceVideo.videoHeight);
+
+        // add data write to canvas with .getImageData method - creates data pixel array
+        var frame = hiddenContext.getImageData(0,0,sourceVideo.videoWidth, sourceVideo.videoHeight);
+
+        var length = frame.data.length;
+        for (var i =0; i <length; i++){
+            var r = frame.data [i * 4 + 0];
+            var g = frame.data [i * 4 + 1];
+            var b = frame.data [i * 4 + 2];
+
+            if(g > 110 && g < 200 && r < 190 && r > 100 && b < 200 && b > 110){
+                frame.data[i * 4 + 3] = 0;
+            }
+        }
+        displayContext.putImageData(frame, 0, 0);
+        return
+    }
+
+</script>
+</body>
+</html>

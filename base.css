@@ -1,0 +1,95 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    margin: 0 auto;
+    border: 1px solid black;
+    width: 83.675889328%
+
+}
+
+div.logo-container {
+    width: 25%;
+    display: inline-block;
+    float: left;
+}
+
+div.treehouse-logo-container {
+    width: 25%;
+    display: inline-block;
+    float: right;
+}
+
+div.nav > ul {
+    list-style-type: none;
+}
+
+nav > ul > li {
+    display: inline-block;
+    color: white;
+    font: 500 1em 'Courier New';
+}
+
+div.line {
+    height: 0.25em;
+}
+
+div.line + div{
+    cursor: pointer;
+
+}
+
+nav > ul > li:nth-child(1) > div:first-child {
+    background-color: #D27114;
+}
+nav > ul > li:nth-child(1) > div:last-child:hover {
+    background-color: #D27114;
+}
+
+nav > ul > li:nth-child(2) > div:first-child {
+    background-color: #D27114;
+}
+nav > ul > li:nth-child(2) > div:last-child:hover {
+    background-color: #D27114;
+}
+
+nav > ul > li:nth-child(3) > div:first-child {
+    background-color: #D27114;
+}
+nav > ul > li:nth-child(3) > div:last-child:hover {
+    background-color: #D27114;
+}
+
+nav > ul > li:nth-child(4) > div:first-child {
+    background-color: #D27114;
+}
+nav > ul > li:nth-child(4) > div:last-child:hover {
+    background-color: #D27114;
+}
+
+nav > ul > li:nth-child(5) > div:first-child {
+    background-color: #D27114;
+}
+nav > ul > li:nth-child(5) > div:last-child:hover {
+    background-color: #D27114;
+}
+
+nav > ul > li:nth-child(6) > div:first-child {
+    background-color: #D27114;
+}
+nav > ul > li:nth-child(6) > div:last-child:hover {
+    background-color: #D27114;
+}
+
+div.search-container {
+    display: inline-block;
+    float: right;
+}
+
+section.main-container {
+    width: 83.675888%;
+    margin: 0 auto;
+    color: red;
+}
